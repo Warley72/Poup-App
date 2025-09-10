@@ -11,6 +11,8 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { ButtonDarkMode } from "@/components/ButtonDarkMode"
+import FinanceTable from "@/components/layout/FinanceTable"
+import { Button } from "@/components/ui/button"
 
 export default function Page() {
     return (
@@ -39,8 +41,14 @@ export default function Page() {
                         <div className="bg-muted/50 aspect-video rounded-xl" />
                         <div className="bg-muted/50 aspect-video rounded-xl" />
                     </div>
-                    <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" >
-
+                    <div className="flex flex-col w-[90%] mx-auto gap-4">
+                        <div className="flex justify-between">
+                            <Button className="w-auto">Add Invoice</Button>
+                            <Button className="w-auto">Meses</Button>
+                        </div>
+                        <div className="bg-muted/50 rounded-xl p-4">
+                            <FinanceTable />
+                        </div>
                     </div>
                 </div>
             </SidebarInset>
