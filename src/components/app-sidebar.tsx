@@ -160,10 +160,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader className="flex items-center justify-center">
-                <img className="w-25" src="/logo/logoPoupApp.png" />
+                <img className="mt-4 w-15" src="/logo/Poup.svg" />
             </SidebarHeader>
             <SidebarContent>
-                
+
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />
