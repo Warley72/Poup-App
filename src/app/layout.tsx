@@ -12,7 +12,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
     title: "PoupApp",
     icons: {
-        icon: "/logo/logoPoupApp.png",
+        icon: "/logo/Poup.svg",
     },
 };
 

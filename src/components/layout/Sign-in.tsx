@@ -9,7 +9,7 @@ export default function SignIn() {
     return (
         <div className="flex items-center justify-center flex-col max-w-md w-full rounded-2xl border p-4">
             <div className="flex items-center flex-col">
-                <img className="max-w-[150px]" src="/logo/logoPoupApp.png" alt="logoPoupApp" />
+                <img className="max-w-[100px] mb-2" src="/logo/Poup.svg" alt="logoPoupApp" />
                 <h1>PoupApp</h1>
                 <p>Hora de colocar as finanças no azul</p>
             </div>

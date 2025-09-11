@@ -13,6 +13,7 @@ import {
 import { ButtonDarkMode } from "@/components/ButtonDarkMode"
 import FinanceTable from "@/components/layout/FinanceTable"
 import { Button } from "@/components/ui/button"
+import ModalFincance from "@/components/layout/ModalFincance"
 
 export default function Page() {
     return (
@@ -43,7 +44,7 @@ export default function Page() {
                     </div>
                     <div className="flex flex-col w-[90%] mx-auto gap-4">
                         <div className="flex justify-between">
-                            <Button className="w-auto">Add Invoice</Button>
+                            <ModalFincance />
                             <Button className="w-auto">Meses</Button>
                         </div>
                         <div className="bg-muted/50 rounded-xl p-4">
