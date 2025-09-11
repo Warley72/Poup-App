@@ -12,7 +12,7 @@ export default function FinanceTable() {
     return (
         <Table>
             <TableHeader>
-                <TableRow>
+                <TableRow >
                     <TableHead >Invoice</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Method</TableHead>

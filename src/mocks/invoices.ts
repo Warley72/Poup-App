@@ -1,4 +1,4 @@
-import { InvoicesProp } from "@/interface/invoices"
+import { InvoicesProp } from "@/interfaces/invoices"
 
 export const invoices: InvoicesProp[] = [
     {

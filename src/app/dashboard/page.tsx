@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/layout/app-sidebar"
 import { Separator } from "@/components/ui/separator"
 import {
     Breadcrumb,
@@ -10,7 +10,7 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { ButtonDarkMode } from "@/components/ButtonDarkMode"
+import { ButtonDarkMode } from "@/components/layout/ButtonDarkMode"
 import FinanceTable from "@/components/layout/FinanceTable"
 import { Button } from "@/components/ui/button"
 import ModalFincance from "@/components/layout/ModalFincance"
@@ -38,16 +38,22 @@ export default function Page() {
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                        <div className="bg-muted/50 aspect-video rounded-xl" />
-                        <div className="bg-muted/50 aspect-video rounded-xl" />
-                        <div className="bg-muted/50 aspect-video rounded-xl" />
+                        <div className="flex items-center justify-center bg-muted/50 aspect-video rounded-xl w-[95%]" >
+                            <h1 className="text-4xl text-green-500">R$200</h1>
+                        </div>
+                        <div className="flex items-center justify-center bg-muted/50 aspect-video rounded-xl w-[95%]" >
+                            <h1 className="text-4xl">R$2000</h1>
+                        </div>
+                        <div className="flex items-center justify-center bg-muted/50 aspect-video rounded-xl w-[95%]" >
+                            <h1 className="text-4xl text-red-600">R$200</h1>
+                        </div>
                     </div>
                     <div className="flex flex-col w-[90%] mx-auto gap-4">
                         <div className="flex justify-between">
                             <ModalFincance />
                             <Button className="w-auto">Meses</Button>
                         </div>
-                        <div className="bg-muted/50 rounded-xl p-4">
+                        <div className="border rounded-xl">
                             <FinanceTable />
                         </div>
                     </div>
