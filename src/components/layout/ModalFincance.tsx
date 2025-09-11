@@ -20,7 +20,7 @@ export default function ModalFincance() {
                 <DialogContent className="sm:max-w-[400px]">
                     <DialogHeader className="flex items-center">
                         <DialogTitle>
-                            <img className="w-[60px]" src="/logo/Poup.svg" />
+                            <img className="w-[60px]" src="/logo/icon.svg" />
                         </DialogTitle>
                     </DialogHeader>
                     <div>
