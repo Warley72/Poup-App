@@ -1,4 +1,4 @@
-import { AppSidebar } from "../../components/layout/app-sidebar"
+import { AppSidebar } from "@/app/dashboard/components/app-sidebar"
 import { Separator } from "../../components/ui/separator"
 import {
     Breadcrumb,
@@ -11,9 +11,10 @@ import {
     SidebarTrigger,
 } from "../../components/ui/sidebar"
 import { ButtonDarkMode } from "../../components/layout/ButtonDarkMode"
-import FinanceTable from "../../components/layout/FinanceTable"
+import FinanceTable from "./components/FinanceTable"
 import { Button } from "../../components/ui/button"
-import ModalFincance from "../../components/layout/ModalFincance"
+
+import ModalFincance from "./components/ModalFincance"
 
 export default function Page() {
     return (
