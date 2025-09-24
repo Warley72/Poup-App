@@ -6,15 +6,15 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     useSidebar,
-} from "../ui/sidebar"
+} from "@/components/ui/sidebar"
 import { ChevronsUpDown, LogOut } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage,} from "../ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar"
 import Link from "next/link"
 
 export function NavUser({ user }: {user: {

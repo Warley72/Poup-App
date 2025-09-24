@@ -1,4 +1,4 @@
-import { invoices } from "../../mocks/invoices"
+import { invoices } from "@/app/dashboard/mocks/invoices"
 import {
     Table,
     TableBody,
@@ -6,7 +6,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "../ui/table"
+} from "@/components/ui/table"
 
 export default function FinanceTable() {
     return (
