@@ -10,13 +10,14 @@ import {
 
 export default function FinanceTable() {
     return (
-        <Table>
+        <Table className="border shadow-sm">
             <TableHeader>
                 <TableRow >
-                    <TableHead >Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead >Amount</TableHead>
+                    <TableHead >Budget</TableHead>
+                    <TableHead>Valor gasto</TableHead>
+                    <TableHead>Devo gastar</TableHead>
+                    <TableHead >Utilizado</TableHead>
+                    <TableHead >Total</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -25,6 +26,7 @@ export default function FinanceTable() {
                         <TableCell >{invoice.invoice}</TableCell>
                         <TableCell >{invoice.paymentStatus}</TableCell>
                         <TableCell >{invoice.paymentMethod}</TableCell>
+                        <TableCell >{invoice.totalAmount}</TableCell>
                         <TableCell >{invoice.totalAmount}</TableCell>
                     </TableRow>
                 ))}
