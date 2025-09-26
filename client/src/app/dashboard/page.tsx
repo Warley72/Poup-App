@@ -14,42 +14,49 @@ import FinanceTable from "./components/FinanceTable"
 import { Button } from "../../components/ui/button"
 
 import ModalFincance from "./components/ModalFincance"
+import GraphicFinance from "./components/graphic-finance"
+import GoalsFinance from "./components/goals-finance"
 
 export default function Page() {
     return (
-        <SidebarProvider>
+        <SidebarProvider className="px-10">
             <AppSidebar />
             <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-                    <div className="flex items-center gap-2 px-4">
-                        <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
+                <header className="flex h-30 shrink-0 items-center transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+                    <div className="flex flex-col w-full">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-8">
+                                <h1 className="text-3xl">Orçamentos domesticos</h1>
+                                <h1 className="text-3xl">Minhas Metas</h1>
+                            </div>
+                            <div>
+                                <Button>Ola, Warley</Button>
+                            </div>
+                        </div>
                     </div>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                        <div className="flex items-center justify-center bg-muted/50 aspect-video rounded-xl w-[95%]" >
-                            <h1 className="text-4xl text-green-500">R$0</h1>
+                <div className="flex flex-1 flex-col">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-2xl">Orçamentos domesticos</h1>
+                            <h1 className="text-lg">Renda do mes</h1>
                         </div>
-                        <div className="flex items-center justify-center bg-muted/50 aspect-video rounded-xl w-[95%]" >
-                            <h1 className="text-4xl">R$0</h1>
-                        </div>
-                        <div className="flex items-center justify-center bg-muted/50 aspect-video rounded-xl w-[95%]" >
-                            <h1 className="text-4xl text-red-600">R$0</h1>
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-lg">Controle seus orçamentos domésticos com base em próprias metas.</h1>
+                            <div className="flex">
+                                <Button>R$5000</Button>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-col w-[90%] mx-auto gap-4">
-                        <div className="flex justify-between">
-                            <ModalFincance />
-                            <Button className="w-auto">Meses</Button>
+                    <div className="flex gap-8  mt-5">
+                        <div className="flex flex-1">
+                            <GraphicFinance />
                         </div>
-                        <div className="border rounded-xl">
+                        <div className="flex flex-3">
                             <FinanceTable />
+                        </div>
+                        <div className="flex flex-1">
+                            <GoalsFinance />
                         </div>
                     </div>
                 </div>
