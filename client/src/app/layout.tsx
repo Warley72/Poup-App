@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google"
+import { Poppins } from "next/font/google"
 import "@/styles/globals.css";
 
 import { ThemeProvider } from "../providers/theme-provider"
 
-const roboto = Roboto({
+const poppins = Poppins({
     subsets: ["latin"],
     weight: ["400", "500", "700"],
 })
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={roboto.className}>
+            <body className={poppins.className}>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
