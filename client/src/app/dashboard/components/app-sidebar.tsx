@@ -1,10 +1,6 @@
 "use client"
-import Link from "next/link";
 
-import { FaHome } from "react-icons/fa";
-import { FaCalculator } from "react-icons/fa6";
-import { FaWallet } from "react-icons/fa6";
-import { RxExit } from "react-icons/rx";
+import Link from "next/link";
 
 import {
     Sidebar,
@@ -13,11 +9,16 @@ import {
     SidebarHeader,
 } from "@/components/ui/sidebar"
 
+import { FaHome } from "react-icons/fa";
+import { FaCalculator } from "react-icons/fa6";
+import { FaWallet } from "react-icons/fa6";
+import { RxExit } from "react-icons/rx";
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader className="flex items-center justify-center">
-                <img className="mt-4 w-14" src="/logo/icon.svg" />
+                <img className="mt-4 w-13" src="/logo/icon.svg" />
             </SidebarHeader>
             <SidebarContent>
                 <Link href={"/"}>
