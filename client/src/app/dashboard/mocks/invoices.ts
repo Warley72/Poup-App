@@ -1,53 +1,44 @@
-import { InvoicesProp } from "../interfaces/invoices"
-
-export const invoices: InvoicesProp[] = [
-    {
-        id: 1,
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: 250.00,
-        paymentMethod: "Credit Card",
-    },
-    {
-        id: 2,
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: 150.00,
-        paymentMethod: "PayPal",
-    },
-    {
-        id: 3,
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: 350.00,
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        id: 4,
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: 450.00,
-        paymentMethod: "Credit Card",
-    },
-    {
-        id: 5,
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: 550.00,
-        paymentMethod: "PayPal",
-    },
-    {
-        id: 6,
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: 200.00,
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        id: 7,
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: 300.00,
-        paymentMethod: "Credit Card",
-    },
+export const invoices = [
+  {
+    "categoria": "Custos fixos",
+    "valor_atual":  "1.70000",
+    "valor_previsto": "1.750",
+    "percentual_concluido": "97.14",
+    "percentual_orcamento": "34.00"
+  },
+  {
+    "categoria": "Conforto",
+    "valor_atual": "R$ 0,00",
+    "valor_previsto": "R$ 750,00",
+    "percentual_concluido": "0.00%",
+    "percentual_orcamento": "0.00%"
+  },
+  {
+    "categoria": "Metas",
+    "valor_atual": "R$ 0,00",
+    "valor_previsto": "R$ 500,00",
+    "percentual_concluido": "0.00%",
+    "percentual_orcamento": "0.00%"
+  },
+  {
+    "categoria": "Prazeres",
+    "valor_atual": "R$ 0,00",
+    "valor_previsto": "R$ 500,00",
+    "percentual_concluido": "0.00%",
+    "percentual_orcamento": "0.00%"
+  },
+  {
+    "categoria": "Liberdade financeira",
+    "valor_atual": "R$ 0,00",
+    "valor_previsto": "R$ 1.250,00",
+    "percentual_concluido": "0.00%",
+    "percentual_orcamento": "0.00%"
+  },
+  {
+    "categoria": "Conhecimento",
+    "valor_atual": "R$ 0,00",
+    "valor_previsto": "R$ 250,00",
+    "percentual_concluido": "0.00%",
+    "percentual_orcamento": "0.00%"
+  }
 ]

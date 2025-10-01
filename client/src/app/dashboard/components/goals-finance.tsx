@@ -7,18 +7,33 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-export default function GoalsFinance () {
+export default function GoalsFinance() {
     return (
-        <Card className="flex flex-col justify-between w-full">
+        <Card className="bg-transparent flex flex-col justify-between w-full">
             <CardHeader>
                 <CardTitle>Resumo</CardTitle>
             </CardHeader>
-            <CardContent>
-                <h1>teste1</h1>
-                <h1>teste2</h1>
-                <h1>teste3</h1>
-                <h1>teste3</h1>
-                <h1>teste3</h1>
+            <CardContent className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                    <h1>Custos fixos</h1>
+                    <span>30%</span>
+                </div>
+                <div className="flex items-center justify-between">
+                    <h1>Conforto</h1>
+                    <span>30%</span>
+                </div>
+                <div className="flex items-center justify-between">
+                    <h1>Prazeres</h1>
+                    <span>30%</span>
+                </div>
+                <div className="flex items-center justify-between">
+                    <h1>Investimentos</h1>
+                    <span>30%</span>
+                </div>
+                <div className="flex items-center justify-between">
+                    <h1>Conhecimentos</h1>
+                    <span>30%</span>
+                </div>
             </CardContent>
             <CardFooter>
                 <Button>Editar</Button>

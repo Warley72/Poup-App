@@ -1,10 +1,5 @@
 import { AppSidebar } from "@/app/dashboard/components/app-sidebar"
-
-import {
-    SidebarInset,
-    SidebarProvider,
-    SidebarTrigger,
-} from "../../components/ui/sidebar"
+import { SidebarInset, SidebarProvider, } from "../../components/ui/sidebar"
 
 import HeaderDashboard from "./components/header-dashboard"
 import SalaryDashboard from "./components/salary-dashboard"
