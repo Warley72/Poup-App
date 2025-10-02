@@ -27,6 +27,10 @@ export default function GoalsFinance() {
                     <span>30%</span>
                 </div>
                 <div className="flex items-center justify-between">
+                    <h1>Metas</h1>
+                    <span>30%</span>
+                </div>
+                <div className="flex items-center justify-between">
                     <h1>Investimentos</h1>
                     <span>30%</span>
                 </div>

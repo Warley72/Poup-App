@@ -6,14 +6,15 @@ import SalaryDashboard from "./components/salary-dashboard"
 import GraphicFinance from "./components/graphic-finance"
 import FinanceTable from "./components/FinanceTable"
 import GoalsFinance from "./components/goals-finance"
+import AnnotationFinance from "./components/annotation-finance"
 
 export default function Page() {
     return (
-        <SidebarProvider className="p-10">
+        <SidebarProvider className="px-18 py-10">
             <AppSidebar />
             <SidebarInset>
                 <HeaderDashboard />
-                <div>
+                <div className="flex flex-col gap-4">
                     <div className="mt-5">
                         <SalaryDashboard />
                     </div>
@@ -27,6 +28,9 @@ export default function Page() {
                         <div className="flex flex-1">
                             <GoalsFinance />
                         </div>
+                    </div>
+                    <div>
+                        <AnnotationFinance />
                     </div>
                 </div>
             </SidebarInset>
