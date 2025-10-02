@@ -46,6 +46,13 @@ export default function FinanceTable() {
                         <TableCell>20%</TableCell>
                     </TableRow>
                     <TableRow className="font-medium">
+                        <TableCell>Metas</TableCell>
+                        <TableCell>R$ 1500</TableCell>
+                        <TableCell>R$ 1800</TableCell>
+                        <TableCell className="text-green-600">95%</TableCell>
+                        <TableCell>20%</TableCell>
+                    </TableRow>
+                    <TableRow className="font-medium">
                         <TableCell>Investimentos</TableCell>
                         <TableCell>R$ 1500</TableCell>
                         <TableCell>R$ 1800</TableCell>
