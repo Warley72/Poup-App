@@ -10,15 +10,15 @@ import AnnotationFinance from "./components/annotation-finance"
 
 export default function Page() {
     return (
-        <SidebarProvider className="px-18 py-10">
+        <SidebarProvider className="px-4 md:px-10 lg:px-18 py-6 md:py-8 lg:py-10">
             <AppSidebar />
             <SidebarInset>
                 <HeaderDashboard />
                 <div className="flex flex-col gap-4">
-                    <div className="mt-5">
+                    <div className="mt-2">
                         <SalaryDashboard />
                     </div>
-                   <div className="flex gap-8 mt-10">
+                   <div className="flex flex-col md:flex-row gap-8 mt-2">
                         <div className="flex flex-1">
                             <GraphicFinance />
                         </div>
