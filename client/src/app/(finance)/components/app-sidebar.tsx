@@ -27,13 +27,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <h1>Home</h1>
                     </div>
                 </Link>
-                <Link href={"/"}>
+                <Link href={"/wallet"}>
                     <div className="flex flex-col items-center gap-0.5">
                         <FaWallet className="h-[1.8rem] w-[1.8rem]" />
                         <h1 >Carteira</h1>
                     </div>
                 </Link>
-                <Link href={"/"}>
+                <Link href={"/dashboard"}>
                     <div className="flex flex-col items-center gap-0.5">
                         <FaCalculator className="h-[1.8rem] w-[1.8rem]" />
                         <h1 >Orçamentos <br /> domesticos</h1>
