@@ -1,16 +1,10 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
 import { useFinanceStore } from "@/app/(finance)/dashboard/store/useFinanceStore"
 import { useExpensesStore } from "@/app/(finance)/dashboard/store/useExpensesStore"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 
 export default function FinanceTable() {
     const { salary, goals } = useFinanceStore()
@@ -45,9 +39,9 @@ export default function FinanceTable() {
 
     return (
         <Card className="bg-transparent w-full p-4">
-            <h1 className="font-medium mb-2">Resumo</h1>
+            <h1 className="font-semibold mb-2">Resumo</h1>
             <Table>
-                <TableHeader className="bg-transparent">
+                <TableHeader>
                     <TableRow className="font-medium">
                         <TableHead>Categoria</TableHead>
                         <TableHead>Valor gasto</TableHead>

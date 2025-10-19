@@ -1,14 +1,12 @@
 "use client"
 
 import { useState, useEffect } from "react"
+
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Slider } from "@/components/ui/slider"
+import { DialogClose } from "@/components/ui/dialog"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
     Dialog,
     DialogContent,
@@ -18,8 +16,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
+
 import { useFinanceStore } from "@/app/(finance)/dashboard/store/useFinanceStore"
 
 export default function GoalsFinance() {
@@ -33,8 +30,8 @@ export default function GoalsFinance() {
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
-        setTotal(custosFixos + conforto + prazeres + metas + conhecimentos)
-    }, [custosFixos, conforto, prazeres, metas, conhecimentos])
+        setTotal(custosFixos + conforto + prazeres + metas + investimentos + conhecimentos)
+    }, [custosFixos, conforto, prazeres, metas, investimentos, conhecimentos])
 
     const handleSave = () => {
         setGoals({
@@ -51,6 +48,9 @@ export default function GoalsFinance() {
         <Card className="bg-transparent flex flex-col justify-between w-full">
             <CardHeader>
                 <CardTitle>Metas</CardTitle>
+                <div className="text-center">
+                    <h1>Total {total}%</h1>
+                </div>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
                 <GoalDisplay label="Custos fixos" value={goals.custosFixos} />
@@ -88,9 +88,11 @@ export default function GoalsFinance() {
                         </div>
 
                         <DialogFooter>
-                            <Button type="button" onClick={handleSave}>
-                                Salvar
-                            </Button>
+                            <DialogClose asChild>
+                                <Button type="button" onClick={handleSave}>
+                                    Salvar
+                                </Button>
+                            </DialogClose>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
