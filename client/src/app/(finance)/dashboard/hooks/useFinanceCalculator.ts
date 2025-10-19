@@ -1,12 +1,8 @@
 import { useMemo } from "react";
 
-interface Category {
-    name: string;
-    percent: number;
-    spent?: number;
-}
+import { IcategoryCalculator } from "@/app/(finance)/dashboard/interfaces/FinanceStore"
 
-export function useFinanceCalculator(salary: number, categories: Category[]) {
+export function useFinanceCalculator(salary: number, categories: IcategoryCalculator[]) {
     return useMemo(() => {
         const categoriesWithValues = categories.map((cat) => ({
             ...cat,

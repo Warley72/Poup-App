@@ -11,17 +11,8 @@ export default function HeaderDashboard() {
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
                     <div>
-                        <h1 className="text-sm md:text-xl lg:text-2xl uppercase">
+                        <h1 className="text-xl md:text-3xl font-medium uppercase">
                             Orçamentos domésticos
-                        </h1>
-                    </div>
-                    <Separator
-                        orientation="vertical"
-                        className="hidden lg:block data-[orientation=vertical]:h-6 bg-neutral-700"
-                    />
-                    <div>
-                        <h1 className="text-sm md:text-xl lg:text-2xl uppercase">
-                            Minhas Metas
                         </h1>
                     </div>
                 </div>
