@@ -17,13 +17,13 @@ export default function Page() {
                         <SalaryDashboard />
                     </div>
                     <div className="flex flex-col md:flex-row gap-8 mt-2">
-                        <div className="flex flex-1">
+                        <div className="flex flex-2">
                             <GraphicFinance />
                         </div>
-                        <div className="flex flex-3">
+                        <div className="flex flex-4">
                             <FinanceTable />
                         </div>
-                        <div className="flex flex-1">
+                        <div className="flex flex-2">
                             <GoalsFinance />
                         </div>
                     </div>

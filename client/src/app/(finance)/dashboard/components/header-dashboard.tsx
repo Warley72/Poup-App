@@ -9,12 +9,10 @@ export default function HeaderDashboard() {
                 <div className="block md:hidden">
                     <SidebarTrigger className="h-8 w-8 rounded-sm border hover:bg-neutral-800" />
                 </div>
-                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-                    <div>
-                        <h1 className="text-xl md:text-3xl font-medium uppercase">
-                            Orçamentos domésticos
-                        </h1>
-                    </div>
+                <div className="flex items-center">
+                    <h1 className="text-lg md:text-3xl text-center font-medium uppercase">
+                        Orçamentos domésticos
+                    </h1>
                 </div>
                 <div className="flex items-center gap-4 rounded-lg border p-1">
                     <h1 className="hidden md:block">Olá, Warley</h1>
