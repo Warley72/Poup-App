@@ -66,7 +66,7 @@ export default function FinanceTable() {
                 </TableBody>
             </Table>
 
-            <div className="flex items-center justify-center gap-8 mt-4">
+            <div className="flex items-center justify-center flex-wrap gap-8 mt-4">
                 <div className="flex flex-col items-center">
                     <h1 className="text-green-500 text-lg font-medium">
                         R$ {salary.toLocaleString("pt-BR")}

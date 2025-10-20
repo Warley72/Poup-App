@@ -46,7 +46,7 @@ export default function GraphicFinance() {
 
     return (
         <Card className="bg-transparent flex flex-col w-full">
-            <CardHeader className="items-center pb-0">
+            <CardHeader className="items-center">
                 <CardTitle>Gastos</CardTitle>
             </CardHeader>
 
