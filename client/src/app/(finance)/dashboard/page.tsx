@@ -16,7 +16,7 @@ export default function Page() {
                     <div className="mt-2">
                         <SalaryDashboard />
                     </div>
-                    <div className="flex flex-col md:flex-row gap-8 mt-2">
+                    <div className="flex flex-col flex-wrap md:flex-row gap-8 mt-2">
                         <div className="flex flex-2">
                             <GraphicFinance />
                         </div>

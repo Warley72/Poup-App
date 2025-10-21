@@ -52,13 +52,15 @@ export default function GraphicFinance() {
 
             <CardContent className="flex flex-col items-center justify-center">
                 <ChartContainer
-                    className="w-[250px] h-[250px]"
-                    config={{
-                        visitors: {
-                            label: "Despesas",
-                            color: "hsl(var(--chart-1))",
-                        },
-                    }}
+                    className="mx-auto aspect-square w-full max-w-[250px]"
+                    config={
+                        {
+                            visitors: {
+                                label: "Despesas",
+                                color: "hsl(var(--chart-1))",
+                            },
+                        }
+                    }
                 >
                     <PieChart>
                         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
