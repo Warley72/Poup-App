@@ -60,7 +60,7 @@ export default function GoalsFinance() {
                 <GoalDisplay label="Investimentos" value={goals.investimentos} />
                 <GoalDisplay label="Conhecimentos" value={goals.conhecimentos} />
             </CardContent>
-
+            
             <CardFooter>
                 <Dialog>
                     <DialogTrigger asChild>
