@@ -1,37 +1,29 @@
+import { User } from "../../models/User";
 import { PrismaClient } from "../../generated/prisma";
 
 const prisma = new PrismaClient();
 
 class UserPrismaRepositories {
 
-    async getAll() {
+    async getAll(): Promise<User[]> {
         const getUser = await prisma.user.findMany();
-        console.log(getUser);
         return getUser;
     }
 
-    async create() {
-        const newUser = await prisma.user.create({
-            data: {
-                name: "coconildo",
-                password: "coconildo123",
-            },
+    async getById(id: number): Promise<User | null> {
+        const getByIdUser = await prisma.user.findFirst({
+            where: { id },
         });
-        console.log(newUser);
+        console.log(getByIdUser)
+        return getByIdUser;
+    }
+
+    async create(data: User): Promise<User> {
+        const newUser = await prisma.user.create({ data });
         return newUser;
     }
 
-    async getById() {
-        const getByIdUser = await prisma.user.findFirst({
-            where: {
-                id: 3
-            }
-        })
-        console.log(getByIdUser)
-        return getByIdUser
-    }
-
-    async update() {
+    async update(id: number, data: User): Promise<User> {
         const updateUser = await prisma.user.update({
             data: {
                 name: "Wellen",
@@ -44,17 +36,16 @@ class UserPrismaRepositories {
         return updateUser;
     }
 
-    async delete() {
-        const deleteUser = await prisma.user.delete({
-            where:{
-                id: 3
-            }
-        })
-        console.log(deleteUser)
-        return deleteUser
+    async delete(id: number): Promise<number> {
+        const deleteUser: any = await prisma.user.delete({
+            where: {
+                id: 3,
+            },
+        });
+        console.log(deleteUser);
+        return 3;
     }
 }
-
 const userPrismaRepositories = new UserPrismaRepositories();
-
-userPrismaRepositories.delete();
+userPrismaRepositories.getAll();
+export default UserPrismaRepositories;

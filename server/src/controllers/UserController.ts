@@ -1,22 +1,30 @@
 import { Request, Response } from "express";
 
-class UserController {
+import UserService from "../services/UserService";
+import UserPrismaInMemory from "../repositories/in-memory/UserPrismaInMemory";
+import UserPrismaRepositories from "../repositories/prisma/UserPrismaRepositories";
 
-    async create(Req: Request, Res: Response) {
-        try {
-        } catch (err: any) {
-            Res.status(400).json({ error: err.message });
-        }
-    }
+const userService = new UserService(new UserPrismaInMemory());
+
+class UserController {
 
     async getAll(Req: Request, Res: Response) {
         try {
+            const userData = await userService.getAll();
+            Res.json(userData);
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
     }
 
     async getById(Req: Request, Res: Response) {
+        try {
+        } catch (err: any) {
+            Res.status(400).json({ error: err.message });
+        }
+    }
+
+    async create(Req: Request, Res: Response) {
         try {
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
