@@ -48,4 +48,5 @@ class UserPrismaRepositories {
 }
 const userPrismaRepositories = new UserPrismaRepositories();
 userPrismaRepositories.getAll();
+
 export default UserPrismaRepositories;
