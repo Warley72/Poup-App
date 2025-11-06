@@ -1,0 +1,6 @@
+class ExpenseService {
+
+    constructor () {
+
+    }
+}

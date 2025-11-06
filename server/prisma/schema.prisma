@@ -1,16 +1,62 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+    provider = "prisma-client-js"
+    output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  password  String   @unique
-  createdAt DateTime @default(now())
+    id        Int      @id @default(autoincrement())
+    name      String
+    password  String   @unique
+    createdAt DateTime @default(now())
+
+    Salary  Salary[]
+    Expense Expense[]
+}
+
+model Salary {
+    id        String   @id @default(uuid())
+    amount    Float
+    createdAt DateTime @default(now())
+
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+
+    Expense  Expense[]
+    Category Category[]
+}
+
+model Expense {
+    id        String   @id @default(uuid())
+    name      String
+    amount    Float
+    createdAt DateTime @default(now())
+
+    userId Int
+    user   User @relation(fields: [userId], references: [id])
+
+    salaryId String
+    salary   Salary @relation(fields: [salaryId], references: [id])
+
+    categoryId String
+    category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+    id          String   @id @default(uuid())
+    name        String
+    percentage  Float
+    shouldSpend Float
+    amountSpent Float    @default(0)
+    utilized    Float    @default(0)
+    goal        String?
+    createdAt   DateTime @default(now())
+
+    salaryId String
+    salary   Salary    @relation(fields: [salaryId], references: [id])
+    expenses Expense[]
 }
