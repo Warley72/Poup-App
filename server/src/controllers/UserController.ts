@@ -4,7 +4,7 @@ import UserService from "../services/UserService";
 import UserPrismaInMemory from "../repositories/in-memory/UserPrismaInMemory";
 import UserPrismaRepositories from "../repositories/prisma/UserPrismaRepositories";
 
-const userService = new UserService(new UserPrismaInMemory());
+const userService = new UserService(new UserPrismaRepositories());
 
 class UserController {
 

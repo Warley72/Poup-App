@@ -1,52 +1,70 @@
-import { User } from "../../models/User";
 import { PrismaClient } from "../../generated/prisma";
+import { User } from "../../models/User";
 
 const prisma = new PrismaClient();
 
 class UserPrismaRepositories {
-
     async getAll(): Promise<User[]> {
-        const getUser = await prisma.user.findMany();
-        return getUser;
+        const users = await prisma.user.findMany({
+            include: {
+                Salary: true,
+                Expense: true,
+            },
+        });
+        return users;
     }
 
     async getById(id: number): Promise<User | null> {
-        const getByIdUser = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
             where: { id },
+            include: {
+                Salary: true,
+                Expense: true,
+            },
         });
-        console.log(getByIdUser)
-        return getByIdUser;
+        return user;
     }
 
-    async create(data: User): Promise<User> {
-        const newUser = await prisma.user.create({ data });
-        return newUser;
-    }
-
-    async update(id: number, data: User): Promise<User> {
-        const updateUser = await prisma.user.update({
+    async create(
+        data: Omit<User, "id" | "createdAt" | "Salary" | "Expense">
+    ): Promise<User> {
+        const user = await prisma.user.create({
             data: {
-                name: "Wellen",
+                name: data.name,
+                password: data.password,
             },
-            where: {
-                id: 1,
+            include: {
+                Salary: true,
+                Expense: true,
             },
         });
-        console.log(updateUser);
-        return updateUser;
+        return user;
     }
 
-    async delete(id: number): Promise<number> {
-        const deleteUser: any = await prisma.user.delete({
-            where: {
-                id: 3,
+    async update(id: number, data: Partial<User>): Promise<User> {
+        const { id: _id, createdAt, Salary, Expense, ...safeData } = data;
+
+        const user = await prisma.user.update({
+            where: { id },
+            data: safeData,
+            include: {
+                Salary: true,
+                Expense: true,
             },
         });
-        console.log(deleteUser);
-        return 3;
+        return user;
+    }
+
+    async delete(id: number): Promise<User> {
+        const user = await prisma.user.delete({
+            where: { id },
+            include: {
+                Salary: true,
+                Expense: true,
+            },
+        });
+        return user;
     }
 }
-const userPrismaRepositories = new UserPrismaRepositories();
-userPrismaRepositories.getAll();
 
 export default UserPrismaRepositories;
