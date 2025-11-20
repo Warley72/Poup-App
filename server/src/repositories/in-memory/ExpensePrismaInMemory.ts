@@ -20,14 +20,19 @@ class ExpensePrismaInMemory implements ExpensePrismaRepositories {
     }
 
     async getAll(): Promise<Expense[]> {
-        return this.expense
+        return this.expense;
     }
 
-    async getByiD(id: string): Promise<Expense | null> {
-        const getByIdExpense = await prisma.expense.findFirst({
+    async getById(id: string): Promise<Expense | null> {
+        const expense = await prisma.expense.findUnique({
             where: { id },
+            include: {
+                user: true,
+                salary: true,
+                category: true,
+            },
         });
-        return getByIdExpense;
+        return expense;
     }
 
     async create(data: Expense): Promise<Expense> {

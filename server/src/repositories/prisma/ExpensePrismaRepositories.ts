@@ -1,45 +1,75 @@
-import { Expense } from "../../models/Expense";
 import { PrismaClient } from "../../generated/prisma";
+import { Expense } from "../../models/Expense";
 
 const prisma = new PrismaClient();
 
 class ExpensePrismaRepositories {
     async getAll(): Promise<Expense[]> {
-        const getExpense = await prisma.expense.findMany();
-        return getExpense;
+        const expenses = await prisma.expense.findMany({
+            include: {
+                user: true,
+                salary: true,
+                category: true,
+            },
+        });
+        return expenses;
     }
 
-    async getByiD(id: string): Promise<Expense | null> {
-        const getByIdExpense = await prisma.expense.findFirst({
+    async getById(id: string): Promise<Expense | null> {
+        const expense = await prisma.expense.findUnique({
             where: { id },
+            include: {
+                user: true,
+                salary: true,
+                category: true,
+            },
         });
-        return getByIdExpense;
+        return expense;
     }
 
-    async create(data: Expense): Promise<Expense> {
-        const NewExpense = await prisma.expense.create({ data });
-        return NewExpense;
-    }
-
-    async update(id: string, data: Expense): Promise<Expense> {
-        const updateExpense = await prisma.expense.update({
+    async create(data: Omit<Expense, "id" | "createdAt">): Promise<Expense> {
+        const expense = await prisma.expense.create({
             data: {
-                name: "aluguel do carro caralho",
+                name: data.name,
+                amount: data.amount,
+                userId: data.userId,
+                salaryId: data.salaryId,
+                categoryId: data.categoryId,
             },
-            where: {
-                id: "1",
+            include: {
+                user: true,
+                salary: true,
+                category: true,
             },
         });
-        return updateExpense;
+        return expense;
     }
 
-    async delete(id: string): Promise<string> {
-        const deleteExpense: any = await prisma.expense.delete({
-            where: {
-                id: "2"
-            }
-        })
-        return deleteExpense
+    async update(id: string, data: Partial<Expense>) {
+        const { id: _id, createdAt, ...safeData } = data;
+
+        const expense = await prisma.expense.update({
+            where: { id },
+            data: safeData,
+            include: {
+                user: true,
+                salary: true,
+                category: true,
+            },
+        });
+        return expense;
+    }
+
+    async delete(id: string): Promise<Expense> {
+        const expense = await prisma.expense.delete({
+            where: { id },
+            include: {
+                user: true,
+                salary: true,
+                category: true,
+            },
+        });
+        return expense;
     }
 }
 export default ExpensePrismaRepositories;

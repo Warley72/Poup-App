@@ -1,14 +1,22 @@
 import { Router } from "express"
 
 import UserController from "../src/controllers/UserController"
+import ExpenseController from "../src/controllers/ExpenseController"
 
 const routes = Router();
 const userController = new UserController();
+const expenseController = new ExpenseController()
 
 routes.get("/users", userController.getAll);
-routes.get("/users/id", userController.getById);
+routes.get("/users/:id", userController.getById);
 routes.post("/users", userController.create)
-routes.put("/users", userController.update)
-routes.delete("/users", userController.delete)
+routes.put("/users/:id", userController.update)
+routes.delete("/users/:id", userController.delete)
+
+routes.get("/expense", expenseController.getAll)
+routes.get("/expense/:id", expenseController.getById)
+routes.post("/expense", expenseController.create)
+routes.put("/expense/:id", expenseController.update)
+routes.delete("/expense/:id", expenseController.delete)
 
 export default routes;
