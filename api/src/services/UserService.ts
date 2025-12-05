@@ -3,6 +3,7 @@ import UserPrismaRepositories from "../repositories/prisma/UserPrismaRepositorie
 import { User } from "../models/User"
 
 class UserService {
+
     constructor(private _inMemoryUserPrisma: UserPrismaRepositories) { }
 
     async getAll(): Promise<{ data: User[] }> {
