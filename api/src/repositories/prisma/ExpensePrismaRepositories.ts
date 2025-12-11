@@ -43,12 +43,12 @@ class ExpensePrismaRepositories {
     }
 
     async update(id: string, data: Partial<Expense>): Promise<Expense> {
-        const {id: _ignoreId, createdAt, ...safeData} = data
+        const { id: _ignoreId, createdAt, ...safeData } = data
 
         const expense = await prisma.expense.update(
             {
-                where:{id},
-                data:safeData,
+                where: { id },
+                data: safeData,
                 include: {
                     user: true,
                     salary: true,

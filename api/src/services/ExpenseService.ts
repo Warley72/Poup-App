@@ -6,34 +6,34 @@ class ExpenseService {
 
     constructor(private __inMemoryExpensePrisma: ExpensePrismaRepositories) { }
 
-    async getall(): Promise<{data: Expense[]}> {
+    async getall(): Promise<{ data: Expense[] }> {
         const expenseData = await this.__inMemoryExpensePrisma.getAll()
         return { data: expenseData }
     }
 
-    async getById(id: string) {
+    async getById(id: string): Promise<{ data: Expense }> {
         const expenseData = await this.__inMemoryExpensePrisma.getById(id)
 
         if (!expenseData) {
-            throw new Error("Esse dispensa nao existe")
+            throw new Error("Essa dispensa nao existe")
         }
 
-        return { data: expenseData}
+        return { data: expenseData }
     }
 
-    async create(data: Expense): Promise<{data: Expense}> {
+    async create(data: Expense): Promise<{ data: Expense }> {
         const expenseData = await this.__inMemoryExpensePrisma.create(data)
-        return { data: expenseData}
+        return { data: expenseData }
     }
 
-    async update(id: string, data: Expense): Promise<{id: string, data: Expense}> {
+    async update(id: string, data: Expense): Promise<{ id: string, data: Expense }> {
         const expenseData = await this.__inMemoryExpensePrisma.update(id, data)
-        return {id, data: expenseData}
+        return { id, data: expenseData }
     }
 
-    async delete(id: string): Promise<{id: string}> {
+    async delete(id: string): Promise<{ id: string }> {
         await this.__inMemoryExpensePrisma.delete(id)
-        return {id}
+        return { id }
     }
 }
 export default ExpenseService
