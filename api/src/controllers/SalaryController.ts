@@ -1,16 +1,16 @@
-import { Request, Response } from "express";
+import { Request, Response } from "express"
 
-import ExpenseService from "../services/ExpenseService"
-import ExpensePrismaRepositories from "../repositories/prisma/ExpensePrismaRepositories"
+import SalaryServices from "../services/SalaryServices"
+import SalaryPrismaRepositories from "../repositories/prisma/SalaryPrismaRepositories"
 
-const expenseService = new ExpenseService(new ExpensePrismaRepositories())
+const salaryService = new SalaryServices(new SalaryPrismaRepositories())
 
-class ExpenseController {
+class SalaryController {
 
     async getAll(Req: Request, Res: Response) {
         try {
-            const dataExpense = await expenseService.getall()
-            Res.json(dataExpense)
+            const dataSalary = await salaryService.getAll()
+            Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
@@ -22,11 +22,11 @@ class ExpenseController {
             const { id } = Req.params;
 
             if (!Req.params.id) {
-                throw new Error("O id é obrigatório!");
+                throw new Error("Saldo nao existe")
             }
 
-            const dataExpense = await expenseService.getById(id)
-            Res.json(dataExpense)
+            const dataSalary = await salaryService.getById(id)
+            Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
@@ -37,8 +37,8 @@ class ExpenseController {
 
             const data = Req.body
 
-            const expenseCreate = await expenseService.create(data)
-            Res.json(expenseCreate)
+            const dataSalary = await salaryService.create(data)
+            Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
@@ -46,11 +46,12 @@ class ExpenseController {
 
     async update(Req: Request, Res: Response) {
         try {
-            const id = Req.params.id
-            const data = Req.body
 
-            const expenseUpdate = await expenseService.update(id, data)
-            Res.json(expenseUpdate)
+            const id = Req.params.id
+            const data=  Req.body
+
+            const dataSalary = await salaryService.update(id, data)
+            Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
@@ -58,13 +59,14 @@ class ExpenseController {
 
     async delete(Req: Request, Res: Response) {
         try {
+
             const id = Req.params.id
 
-            const expenseDelete = await expenseService.delete(id)
-            Res.json(expenseDelete)
+            const dataSalary = await salaryService.delete(id)
+            Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
     }
 }
-export default ExpenseController
+export default SalaryController
