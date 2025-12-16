@@ -1,4 +1,4 @@
-import SalaryPrismaRepositories from "../repositories/prisma/SalaryPrismaRepositories"
+import SalaryPrismaRepositories from "../repositories/prisma/RevenuesPrismaRepositories"
 
 import { Salary } from "../models/Salary"
 

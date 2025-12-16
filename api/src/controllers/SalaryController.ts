@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 
 import SalaryServices from "../services/SalaryServices"
-import SalaryPrismaRepositories from "../repositories/prisma/SalaryPrismaRepositories"
+import SalaryPrismaRepositories from "../repositories/prisma/RevenuesPrismaRepositories"
 
 const salaryService = new SalaryServices(new SalaryPrismaRepositories())
 

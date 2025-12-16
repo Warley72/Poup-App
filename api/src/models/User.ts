@@ -1,12 +1,12 @@
 import { Expense } from "../models/Expense"
-import { Salary } from "../models/Salary"
+import { Revenues } from "../models/Revenues"
 
 export interface User {
-    id: number;
-    name: string;
-    password: string;
-    createdAt: Date;
+    id: number
+    name: string
+    password: string
+    createdAt: Date
 
-    Salary?: Salary[];
-    Expense?: Expense[];
+    revenues: Revenues[]
+    expenses: Expense[]
 }
