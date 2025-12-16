@@ -2,7 +2,7 @@ import { prisma } from "../../../lib/prisma"
 import { Salary } from "../../models/Salary"
 
 
-class SalaryPrismaRepositories {
+class RevenuesPrismaRepositories {
 
     async getAll(): Promise<Salary[]> {
         const salary = await prisma.salary.findMany(

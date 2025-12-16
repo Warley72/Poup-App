@@ -1,6 +1,6 @@
 import { Expense } from "../models/Expense"
 
-export interface Category {
+export interface ExpenseCategory {
   id: string;
   name: string;
   percentage: number;
@@ -10,7 +10,6 @@ export interface Category {
   goal?: string | null;
   createdAt: Date;
 
-  salaryId: string;
 
-  expenses?: Expense[];
+  expenses: Expense[];
 }
