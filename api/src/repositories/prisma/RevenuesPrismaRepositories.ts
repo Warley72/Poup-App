@@ -1,76 +1,59 @@
 import { prisma } from "../../../lib/prisma"
-import { Salary } from "../../models/Salary"
+import { Revenues } from "../../models/Revenues"
 
 
 class RevenuesPrismaRepositories {
 
-    async getAll(): Promise<Salary[]> {
-        const salary = await prisma.salary.findMany(
-            {
-                include: {
-                    user: true,
-                    Expense: true,
-                    Category: true,
-                }
-            })
-        return salary
+    async getAll(): Promise<Revenues[]> {
+
+        return prisma.revenues.findMany({
+            include: {
+                categories: true
+            }
+        })
     }
 
-    async getById(id: string): Promise<Salary | null> {
-        const salary = await prisma.salary.findUnique(
-            {
-                where: { id },
-                include: {
-                    user: true,
-                    Expense: true,
-                    Category: true,
-                }
-            })
-        return salary
+    async getById(id: string): Promise<Revenues | null> {
+
+        return prisma.revenues.findUnique({
+            where: { id },
+            include: {
+                categories: true
+            }
+        })
     }
 
     async create(data:
-        { userId: number, id: string, amount: number }): Promise<Salary> {
-        const salary = await prisma.salary.create(
-            {
-                data,
-                include: {
-                    user: true,
-                    Expense: true,
-                    Category: true,
-                }
-            })
-        return salary
+        { userId: number, id: string, total: number, month: number, year: number }): Promise<Revenues> {
+
+        return prisma.revenues.create({
+            data,
+            include: {
+                categories: true
+            }
+        })
     }
 
-    async update(id: string, data: Partial<Salary>): Promise<Salary> {
-        const { id: _ignoreId, createdAt, Expense, Category, ...safeData } = data
+    async update(id: string, data: Partial<Revenues>) {
+        const { id: _ignoreId, createdAt, categories, ...safeData } = data
 
-        const salary = await prisma.salary.update(
-            {
-                where: { id },
-                data: safeData,
-                include: {
-                    user: true,
-                    Expense: true,
-                    Category: true,
-                }
-            })
-        return salary
+        return prisma.revenues.update({
+            where: { id },
+            data: safeData,
+            include: {
+                categories: true
+            }
+        })
     }
 
-    async delete(id: string): Promise<Salary> {
-        const salary = await prisma.salary.delete(
-            {
-                where: { id },
-                include: {
-                    user: true,
-                    Expense: true,
-                    Category: true,
-                }
-            })
-        return salary
+    async delete(id: string): Promise<Revenues> {
+        return prisma.revenues.delete({
+            where: { id},
+            include: {
+                categories: true
+            }
+        })
     }
 
 }
-export default SalaryPrismaRepositories
+export default RevenuesPrismaRepositories
