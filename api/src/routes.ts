@@ -1,7 +1,7 @@
 import { Router } from "express"
 
 import UserController from "./controllers/UserController";
-import SalaryController from "./controllers/SalaryController";
+import SalaryController from "./controllers/RevenuesController";
 import ExpenseController from "./controllers/ExpenseController";
 import CategoryController from "./controllers/CategoryController";
 

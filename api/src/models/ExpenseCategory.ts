@@ -10,6 +10,5 @@ export interface ExpenseCategory {
   goal?: string | null;
   createdAt: Date;
 
-
   expenses: Expense[];
 }

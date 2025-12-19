@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 
-import CategoryService from "../services/CategoryService"
-import CategoryPrismaRepositories from "../repositories/prisma/CategoryPrismaRepositories";
+import CategoryService from "../services/ExpenseCategoryService"
+import ExpenseCategoryService from "../repositories/prisma/ExpenseCategoryPrismaRepositories";
 
-const categoryService = new CategoryService(new CategoryPrismaRepositories())
+const expensecategoryService = new CategoryService(new ExpenseCategoryService())
 
 class CategoryController {
 
     async getAll(Req: Request, Res: Response) {
         try {
-            const dataCategory = await categoryService.getAll()
+            const dataCategory = await expensecategoryService.getAll()
             Res.json(dataCategory)
         } catch (err: any) {
             Res.status(400).json({ error: err.message })
@@ -25,7 +25,7 @@ class CategoryController {
                 throw new Error("o id é obrigatorio")
             }
 
-            const dataCategory = await categoryService.getById(id)
+            const dataCategory = await expensecategoryService.getById(id)
             Res.json(dataCategory)
         } catch (err: any) {
             Res.status(400).json({ error: err.message })
@@ -37,7 +37,7 @@ class CategoryController {
 
             const data = Req.body
 
-            const dataCategory = await categoryService.create(data)
+            const dataCategory = await expensecategoryService.create(data)
             Res.json(dataCategory)
 
         } catch (err: any) {
@@ -51,7 +51,7 @@ class CategoryController {
             const id = Req.params.id
             const data = Req.body
 
-            const dataCategory = await categoryService.update(id, data)
+            const dataCategory = await expensecategoryService.update(id, data)
             Res.json(dataCategory)
         } catch (err: any) {
             Res.status(400).json({ error: err.message })
@@ -63,7 +63,7 @@ class CategoryController {
 
             const id = Req.params.id
 
-            const dataCategory = await categoryService.delete(id)
+            const dataCategory = await expensecategoryService.delete(id)
             Res.json(dataCategory)
         } catch (err: any) {
             Res.status(400).json({ error: err.message })
