@@ -2,7 +2,7 @@ import SalaryPrismaRepositories from "../repositories/prisma/RevenuesPrismaRepos
 
 import { Revenues } from "../models/Revenues"
 
-class SalaryServices {
+class RevenuesServices {
 
     constructor(private _inMemorySalaryPrisma: SalaryPrismaRepositories) { }
 
@@ -36,4 +36,4 @@ class SalaryServices {
         return { id }
     }
 }
-export default SalaryServices
+export default RevenuesServices
