@@ -1,15 +1,15 @@
 import { Request, Response } from "express"
 
-import SalaryServices from "../services/SalaryServices"
-import SalaryPrismaRepositories from "../repositories/prisma/RevenuesPrismaRepositories"
+import RevenuesServices from "../services/RevenuesServices"
+import RevenuesPrismaRepositories from "../repositories/prisma/RevenuesPrismaRepositories"
 
-const salaryService = new SalaryServices(new SalaryPrismaRepositories())
+const revenuesServices = new RevenuesServices(new RevenuesPrismaRepositories())
 
-class SalaryController {
+class RevenuesController {
 
     async getAll(Req: Request, Res: Response) {
         try {
-            const dataSalary = await salaryService.getAll()
+            const dataSalary = await revenuesServices.getAll()
             Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
@@ -25,7 +25,7 @@ class SalaryController {
                 throw new Error("Saldo nao existe")
             }
 
-            const dataSalary = await salaryService.getById(id)
+            const dataSalary = await revenuesServices.getById(id)
             Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
@@ -37,7 +37,7 @@ class SalaryController {
 
             const data = Req.body
 
-            const dataSalary = await salaryService.create(data)
+            const dataSalary = await revenuesServices.create(data)
             Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
@@ -50,7 +50,7 @@ class SalaryController {
             const id = Req.params.id
             const data=  Req.body
 
-            const dataSalary = await salaryService.update(id, data)
+            const dataSalary = await revenuesServices.update(id, data)
             Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
@@ -62,11 +62,11 @@ class SalaryController {
 
             const id = Req.params.id
 
-            const dataSalary = await salaryService.delete(id)
+            const dataSalary = await revenuesServices.delete(id)
             Res.json(dataSalary)
         } catch (err: any) {
             Res.status(400).json({ error: err.message });
         }
     }
 }
-export default SalaryController
+export default RevenuesController

@@ -5,7 +5,7 @@ import ExpenseCategoryService from "../repositories/prisma/ExpenseCategoryPrisma
 
 const expensecategoryService = new CategoryService(new ExpenseCategoryService())
 
-class CategoryController {
+class ExpenseCategoryController {
 
     async getAll(Req: Request, Res: Response) {
         try {
@@ -71,4 +71,4 @@ class CategoryController {
     }
 
 }
-export default CategoryController;
+export default ExpenseCategoryController;
