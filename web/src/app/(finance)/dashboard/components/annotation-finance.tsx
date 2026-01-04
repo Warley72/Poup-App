@@ -11,7 +11,7 @@ import { FaPlusCircle, FaCarSide, FaHamburger, FaBrain, FaMoneyBillAlt, FaEdit }
 import { FaHouse } from "react-icons/fa6"
 import { GoGoal } from "react-icons/go"
 
-import { api } from "@/services/api"
+import { createExpense } from "@/services/api"
 import { useExpensesStore } from "@/app/(finance)/dashboard/store/useExpensesStore"
 
 export default function AnnotationFinance() {
@@ -25,28 +25,26 @@ export default function AnnotationFinance() {
     const { expenses, addExpense, removeExpense, updateExpense } = useExpensesStore()
 
     const handleAddExpense = async () => {
-        if (!name.trim() || !value.trim()) return;
+        if (!name.trim() || !value.trim()) return
 
         try {
-            const response = await api.createExpense({
+            const response = await createExpense({
                 name,
                 amount: parseFloat(value),
-                userId: 1,
-                salaryId: "b0584ffc-e9a9-46e8-baad-143b8fbb5ac5",
-                categoryId: "9b3d7741-05d7-4e44-8b4d-8376e99ee4de"
-            });
+                userId: 8,
+                categoryId: "f3aceec7-837f-4071-b57f-c25e214db1db",
+            })
 
-            console.log("Criado no backend:", response);
+            console.log("Criado no backend:", response)
 
-            // Atualiza ZUSTAND
-            addExpense(selectedCategory, response.name, response.amount);
+            addExpense(selectedCategory, response.name, response.amount)
 
-            setName("");
-            setValue("");
+            setName("")
+            setValue("")
         } catch (error) {
-            console.error("Erro ao criar expense:", error);
+            console.error("Erro ao criar expense:", error)
         }
-    };
+    }
 
     const handleSaveEdit = (id: string) => {
         if (!editName.trim() || !editValue.trim()) return

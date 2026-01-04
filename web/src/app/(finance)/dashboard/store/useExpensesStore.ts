@@ -1,8 +1,26 @@
-import { create } from "zustand";
-import { IExpensesState } from "@/app/(finance)/dashboard/interfaces/FinanceStore";
+import { create } from "zustand"
+import { IExpensesState } from "@/app/(finance)/dashboard/interfaces/FinanceStore"
+import { getUserExpenses } from "@/services/api"
 
 export const useExpensesStore = create<IExpensesState>((set, get) => ({
     expenses: [],
+
+    setExpenses: (expenses) => set({ expenses }),
+
+    fetchExpenses: async (userId) => {
+        const data = await getUserExpenses(userId)
+
+        console.log("API response =>", data)
+
+        const normalized = data.map((e: any) => ({
+            id: e.id,
+            name: e.name,
+            value: e.amount,
+            category: e.category?.name ?? "Custos fixos"
+        }))
+
+        set({ expenses: normalized })
+    },
 
     addExpense: (category, name, value) =>
         set((state) => ({
@@ -27,7 +45,7 @@ export const useExpensesStore = create<IExpensesState>((set, get) => ({
     clearExpenses: () => set({ expenses: [] }),
 
     getCategoryTotals: () => {
-        const { expenses } = get();
+        const { expenses } = get()
         const categories = [
             "Custos fixos",
             "Conforto",
@@ -35,13 +53,13 @@ export const useExpensesStore = create<IExpensesState>((set, get) => ({
             "Metas",
             "Investimentos",
             "Conhecimentos",
-        ];
+        ]
 
         return categories.map((cat) => ({
             name: cat,
             total: expenses
                 .filter((e) => e.category === cat)
                 .reduce((sum, e) => sum + e.value, 0),
-        }));
+        }))
     },
-}));
+}))

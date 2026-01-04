@@ -1,36 +1,24 @@
-const BASE_URL = "http://127.0.0.1:4000";
+export async function getUserExpenses(userId: number) {
+  const res = await fetch(`http://localhost:4000/expense`)
 
-async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  try {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
-      headers: { "Content-Type": "application/json" },
-      ...options,
-    });
+    console.log("STATUS:", res.status)
 
-    if (!response.ok) {
-      const error = await response.text();
-      throw new Error(error || "Erro desconhecido na API");
-    }
-
-    return response.json();
-  } catch (err: any) {
-    console.error("API Error:", err.message);
-    throw err;
-  }
+  if (!res.ok) throw new Error("Erro ao buscar despesas")
+  return res.json()
 }
 
-export const api = {
-  getUsers: () => request<any[]>("/users"),
-  createUser: (data: any) =>
-    request<any>("/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
+export async function createExpense(data: {
+  name: string
+  amount: number
+  userId: number
+  categoryId: string
+}) {
+  const res = await fetch(`http://localhost:4000/expense`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
 
-  getExpenses: () => request<any[]>("/expense"),
-  createExpense: (data: any) =>
-    request<any>("/expense", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
-};
+  if (!res.ok) throw new Error("Erro ao criar expense")
+  return res.json()
+}

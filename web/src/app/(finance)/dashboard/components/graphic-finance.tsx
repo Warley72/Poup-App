@@ -12,6 +12,10 @@ export default function GraphicFinance() {
     const { expenses } = useExpensesStore()
     const total = expenses.reduce((acc, e) => acc + e.value, 0)
 
+    console.log(expenses)
+    console.log(expenses.map(e => e.value))
+
+
     const categories = [
         "Custos fixos",
         "Conforto",

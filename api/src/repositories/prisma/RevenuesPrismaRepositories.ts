@@ -1,59 +1,64 @@
 import { prisma } from "../../../lib/prisma"
-import { Revenues } from "../../models/Revenues"
+import { Revenue } from "../../models/Revenue"
 
+class RevenuePrismaRepositories {
 
-class RevenuesPrismaRepositories {
+    async getAll(): Promise<Revenue[]> {
 
-    async getAll(): Promise<Revenues[]> {
+        const revenues = await prisma.revenue.findMany()
 
-        return prisma.revenues.findMany({
-            include: {
-                categories: true
+        return revenues.map(revenue => (
+            {
+                id: revenue.id,
+                month: revenue.month,
+                year: revenue.year,
+                createdAt: revenue.createdAt
             }
-        })
+        ))
     }
 
-    async getById(id: string): Promise<Revenues | null> {
+    async getById(id: string): Promise<Revenue | null> {
 
-        return prisma.revenues.findUnique({
-            where: { id },
-            include: {
-                categories: true
-            }
-        })
+        const revenue = await prisma.revenue.findUnique({ where: { id } })
+
+        if (!revenue) return null
+
+        return {
+            id: revenue.id,
+            month: revenue.month,
+            year: revenue.year,
+            createdAt: revenue.createdAt
+        }
     }
 
-    async create(data:
-        { userId: number, id: string, total: number, month: number, year: number }): Promise<Revenues> {
+    async create(data: { userId: number, total: number, month: number, year: number }): Promise<Revenue> {
 
-        return prisma.revenues.create({
-            data,
-            include: {
-                categories: true
-            }
-        })
+        const revenue = await prisma.revenue.create({ data })
+
+        return {
+            id: revenue.id,
+            month: revenue.month,
+            year: revenue.year,
+            createdAt: revenue.createdAt
+        }
     }
 
-    async update(id: string, data: Partial<Revenues>) {
-        const { id: _ignoreId, createdAt, categories, ...safeData } = data
+    async update(id: string, data: { total?: number, month?: number, year?: number }): Promise<Revenue> {
 
-        return prisma.revenues.update({
-            where: { id },
-            data: safeData,
-            include: {
-                categories: true
-            }
-        })
+        const revenue = await prisma.revenue.update({ where: { id }, data })
+
+        return {
+            id: revenue.id,
+            month: revenue.month,
+            year: revenue.year,
+            createdAt: revenue.createdAt
+        }
     }
 
-    async delete(id: string): Promise<Revenues> {
-        return prisma.revenues.delete({
-            where: { id},
-            include: {
-                categories: true
-            }
-        })
+    async delete(id: string): Promise<void> {
+
+        await prisma.revenue.delete({ where: { id } })
     }
 
 }
-export default RevenuesPrismaRepositories
+export default RevenuePrismaRepositories

@@ -3,6 +3,4 @@ export interface RevenueCategory {
     name: string;
     amount: number;
     createdAt: Date;
-
-    revenuesId: string;
 }

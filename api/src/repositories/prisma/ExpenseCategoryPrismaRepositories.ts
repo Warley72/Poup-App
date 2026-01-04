@@ -5,59 +5,75 @@ class ExpenseCategoryPrismaRepositories {
 
     async getAll(): Promise<ExpenseCategory[]> {
 
-        return prisma.expenseCategory.findMany({
-            include: {
-                expenses: true
+        const categories = await prisma.expenseCategory.findMany()
+
+        return categories.map(category => (
+            {
+                id: category.id,
+                name: category.name,
+                percentage: category.percentage,
+                shouldSpend: category.shouldSpend,
+                goal: category.goal ?? "",
+                createdAt: category.createdAt
             }
-        })
+        ))
     }
 
     async getById(id: string): Promise<ExpenseCategory | null> {
 
-        return prisma.expenseCategory.findUnique({
-            where: { id },
-            include: {
-                expenses: true
-            }
-        })
+        const category = await prisma.expenseCategory.findUnique({ where: { id } })
+
+        if (!category) return null
+
+        return {
+            id: category.id,
+            name: category.name,
+            percentage: category.percentage,
+            shouldSpend: category.shouldSpend,
+            goal: category.goal ?? "",
+            createdAt: category.createdAt
+        }
     }
 
-    async create(data: {
-        name: string;
-        percentage: number;
-        shouldSpend: number;
-        amountSpent: number;
-        utilized: number;
-        goal?: string | null;
-    }): Promise<ExpenseCategory> {
+    async create(data: { name: string, percentage: number, shouldSpend: number, goal: string, userId: number}): Promise<ExpenseCategory> {
 
-        return prisma.expenseCategory.create({
-            data,
-            include: {
-                expenses: true
+        const category = await prisma.expenseCategory.create({
+            data: {
+                name: data.name,
+                percentage: data.percentage,
+                shouldSpend: data.shouldSpend,
+                goal: data.goal,
+                userId: data.userId
             }
         })
+
+        return {
+            id: category.id,
+            name: category.name,
+            percentage: category.percentage,
+            shouldSpend: category.shouldSpend,
+            goal: category.goal,
+            createdAt: category.createdAt
+        }
     }
 
-    async update(id: string, data: Partial<ExpenseCategory>) {
-        const { id: _ignoreId, createdAt, expenses, ...safaData } = data
+    async update(id: string, data: {name?: string, percentage?: number, shouldSpend?: number, goal?: string } ): Promise<ExpenseCategory> {
 
-        return prisma.expenseCategory.update(({
-            where: { id },
-            data: safaData,
-            include: {
-                expenses: true
-            }
-        }))
+        const category = await prisma.expenseCategory.update({ where: { id }, data })
+
+        return {
+            id: category.id,
+            name: category.name,
+            percentage: category.percentage,
+            shouldSpend: category.shouldSpend,
+            goal: category.goal,
+            createdAt: category.createdAt
+        }
     }
 
-    async delete(id: string): Promise<ExpenseCategory> {
-        return prisma.expenseCategory.delete({
-            where: { id },
-            include: {
-                expenses: true
-            }
-        })
+    async delete(id: string): Promise<void> {
+        
+        await prisma.expenseCategory.delete({ where: { id } })
     }
 }
 export default ExpenseCategoryPrismaRepositories

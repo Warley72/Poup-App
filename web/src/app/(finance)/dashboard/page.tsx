@@ -1,3 +1,5 @@
+"use client"
+
 import HeaderDashboard from "./components/header-dashboard"
 import SalaryDashboard from "./components/salary-dashboard"
 import GraphicFinance from "./components/graphic-finance"
@@ -6,8 +8,14 @@ import GoalsFinance from "./components/goals-finance"
 import AnnotationFinance from "./components/annotation-finance"
 
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { useExpensesStore } from "./store/useExpensesStore"
+import { useEffect } from "react"
 
 export default function Page() {
+    const fetchExpenses = useExpensesStore((state) => state.fetchExpenses)
+
+    useEffect(() => {fetchExpenses(8)}, [fetchExpenses])
+
     return (
         <SidebarProvider className="px-4 md:px-10 lg:px-18 py-6 md:py-8 lg:py-10">
             <SidebarInset>
