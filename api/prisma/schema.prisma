@@ -8,60 +8,61 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  password  String   @unique
-  createdAt DateTime @default(now())
+    id        Int      @id @default(autoincrement())
+    name      String
+    password  String
+    createdAt DateTime @default(now())
 
-  revenues Revenues[]
-  expenses Expense[]
+    revenues   Revenue[]
+    expenses   Expense[]
+    categories ExpenseCategory[]
 }
 
-model Revenues {
-  id        String   @id @default(uuid())
-  total     Float
-  month     Int
-  year      Int
-  createdAt DateTime @default(now())
+model Revenue {
+    id        String   @id @default(uuid())
+    month     Int
+    year      Int
+    createdAt DateTime @default(now())
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId Int
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  categories RevenueCategory[]
+    categories RevenueCategory[]
 }
 
 model RevenueCategory {
-  id        String   @id @default(uuid())
-  name      String
-  amount    Float
-  createdAt DateTime @default(now())
+    id        String   @id @default(uuid())
+    name      String
+    amount    Float
+    createdAt DateTime @default(now())
 
-  revenuesId String
-  revenues   Revenues @relation(fields: [revenuesId], references: [id], onDelete: Cascade)
+    revenueId String
+    revenue   Revenue @relation(fields: [revenueId], references: [id], onDelete: Cascade)
 }
 
 model Expense {
-  id        String   @id @default(uuid())
-  name      String
-  amount    Float
-  createdAt DateTime @default(now())
+    id     String   @id @default(uuid())
+    name   String
+    amount Float
+    date   DateTime
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId Int
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  categoryId String
-  category   ExpenseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    categoryId String
+    category   ExpenseCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 }
 
 model ExpenseCategory {
-  id          String   @id @default(uuid())
-  name        String
-  percentage  Float
-  shouldSpend Float
-  amountSpent Float    @default(0)
-  utilized    Float    @default(0)
-  goal        String?
-  createdAt   DateTime @default(now())
+    id          String   @id @default(uuid())
+    name        String
+    percentage  Float
+    shouldSpend Float
+    goal        String
+    createdAt   DateTime @default(now())
 
-  expenses Expense[]
+    userId Int
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    expenses Expense[]
 }

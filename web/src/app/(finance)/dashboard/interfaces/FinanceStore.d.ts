@@ -30,17 +30,22 @@ export interface IfinanceState {
 }
 
 export interface IExpense {
-    id: string;
-    category: string;
-    name: string;
-    value: number;
+  id: string
+  category: string
+  name: string
+  value: number
 }
 
 export interface IExpensesState {
-    expenses: IExpense[];
-    addExpense: (category: string, name: string, value: number) => void;
-    removeExpense: (id: string) => void;
-    updateExpense: (id: string, name: string, value: number) => void;
-    clearExpenses: () => void;
-    getCategoryTotals: () => { name: string; total: number }[];
+  expenses: IExpense[]
+
+  addExpense: (category: string, name: string, value: number) => void
+  removeExpense: (id: string) => void
+  updateExpense: (id: string, name: string, value: number) => void
+  clearExpenses: () => void
+
+  setExpenses: (expenses: IExpense[]) => void
+  fetchExpenses: (userId: number) => Promise<void>
+
+  getCategoryTotals: () => { name: string; total: number }[]
 }

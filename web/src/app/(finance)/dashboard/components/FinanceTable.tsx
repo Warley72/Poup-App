@@ -1,129 +1,129 @@
-"use client"
+    "use client"
 
-import { Card } from "@/components/ui/card"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+    import { Card } from "@/components/ui/card"
+    import {
+        Table,
+        TableBody,
+        TableCell,
+        TableHead,
+        TableHeader,
+        TableRow,
+    } from "@/components/ui/table"
 
-import { useFinanceStore } from "@/app/(finance)/dashboard/store/useFinanceStore"
-import { useExpensesStore } from "@/app/(finance)/dashboard/store/useExpensesStore"
+    import { useFinanceStore } from "@/app/(finance)/dashboard/store/useFinanceStore"
+    import { useExpensesStore } from "@/app/(finance)/dashboard/store/useExpensesStore"
 
-export default function FinanceTable() {
-    const { salary, goals } = useFinanceStore()
-    const { expenses } = useExpensesStore()
+    export default function FinanceTable() {
+        const { salary, goals } = useFinanceStore()
+        const { expenses } = useExpensesStore()
 
-    const categories = [
-        { name: "Custos fixos", percent: goals.custosFixos },
-        { name: "Conforto", percent: goals.conforto },
-        { name: "Prazeres", percent: goals.prazeres },
-        { name: "Metas", percent: goals.metas },
-        { name: "Investimentos", percent: goals.investimentos },
-        { name: "Conhecimentos", percent: goals.conhecimentos },
-    ]
+        const categories = [
+            { name: "Custos fixos", percent: goals.custosFixos },
+            { name: "Conforto", percent: goals.conforto },
+            { name: "Prazeres", percent: goals.prazeres },
+            { name: "Metas", percent: goals.metas },
+            { name: "Investimentos", percent: goals.investimentos },
+            { name: "Conhecimentos", percent: goals.conhecimentos },
+        ]
 
-    const calc = categories.map((cat) => {
-        const expected = (salary * cat.percent) / 100
-        const spent = expenses
-            .filter((e) => e.category === cat.name)
-            .reduce((acc, e) => acc + e.value, 0)
-        const usedPercent = expected > 0 ? Math.round((spent / expected) * 100) : 0
+        const calc = categories.map((cat) => {
+            const expected = (salary * cat.percent) / 100
+            const spent = expenses
+                .filter((e) => e.category === cat.name)
+                .reduce((acc, e) => acc + e.value, 0)
+            const usedPercent = expected > 0 ? Math.round((spent / expected) * 100) : 0
 
-        return {
-            ...cat,
-            value: expected,
-            spent,
-            usedPercent,
-        }
-    })
+            return {
+                ...cat,
+                value: expected,
+                spent,
+                usedPercent,
+            }
+        })
 
-    const totalRealExpenses = expenses.reduce((acc, e) => acc + e.value, 0)
-    const utilizationPercent = salary > 0 ? Math.round((totalRealExpenses / salary) * 100) : 0
+        const totalRealExpenses = expenses.reduce((acc, e) => acc + e.value, 0)
+        const utilizationPercent = salary > 0 ? Math.round((totalRealExpenses / salary) * 100) : 0
 
-    return (
-        <Card className="bg-transparent w-full p-4">
-            <h1 className="font-semibold mb-4 text-lg">Resumo</h1>
-            <div className="hidden md:block">
-                <Table>
-                    <TableHeader>
-                        <TableRow className="font-medium">
-                            <TableHead>Categoria</TableHead>
-                            <TableHead>Valor gasto</TableHead>
-                            <TableHead>Devo gastar</TableHead>
-                            <TableHead>Utilizado</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {calc.map((cat) => (
-                            <TableRow key={cat.name} className="font-medium">
-                                <TableCell>{cat.name}</TableCell>
-                                <TableCell>R$ {cat.spent.toLocaleString("pt-BR")}</TableCell>
-                                <TableCell>R$ {cat.value.toLocaleString("pt-BR")}</TableCell>
-                                <TableCell className={
+        return (
+            <Card className="bg-transparent w-full p-4">
+                <h1 className="font-semibold mb-4 text-lg">Resumo</h1>
+                <div className="hidden md:block">
+                    <Table>
+                        <TableHeader>
+                            <TableRow className="font-medium">
+                                <TableHead>Categoria</TableHead>
+                                <TableHead>Valor gasto</TableHead>
+                                <TableHead>Devo gastar</TableHead>
+                                <TableHead>Utilizado</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {calc.map((cat) => (
+                                <TableRow key={cat.name} className="font-medium">
+                                    <TableCell>{cat.name}</TableCell>
+                                    <TableCell>R$ {cat.spent.toLocaleString("pt-BR")}</TableCell>
+                                    <TableCell>R$ {cat.value.toLocaleString("pt-BR")}</TableCell>
+                                    <TableCell className={
+                                        cat.usedPercent > 100
+                                            ? "text-red-500 font-semibold"
+                                            : cat.usedPercent >= 90
+                                                ? "text-yellow-500 font-semibold"
+                                                : "text-green-500 font-semibold"
+                                    }>{cat.usedPercent}%</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
+
+                <div className="flex flex-col gap-3 md:hidden">
+                    {calc.map((cat) => (
+                        <div
+                            key={cat.name}
+                            className="border rounded-xl p-3 flex flex-col gap-1 bg-black/20"
+                        >
+                            <div className="flex justify-between font-semibold">
+                                <span>{cat.name}</span>
+                                <span className={
                                     cat.usedPercent > 100
                                         ? "text-red-500 font-semibold"
                                         : cat.usedPercent >= 90
                                             ? "text-yellow-500 font-semibold"
                                             : "text-green-500 font-semibold"
-                                }>{cat.usedPercent}%</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
+                                }>{cat.usedPercent}%</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                                <span>Valor gasto:</span>
+                                <span>R$ {cat.spent.toLocaleString("pt-BR")}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                                <span>Devo gastar:</span>
+                                <span>R$ {cat.value.toLocaleString("pt-BR")}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
-            <div className="flex flex-col gap-3 md:hidden">
-                {calc.map((cat) => (
-                    <div
-                        key={cat.name}
-                        className="border rounded-xl p-3 flex flex-col gap-1 bg-black/20"
-                    >
-                        <div className="flex justify-between font-semibold">
-                            <span>{cat.name}</span>
-                            <span className={
-                                cat.usedPercent > 100
-                                    ? "text-red-500 font-semibold"
-                                    : cat.usedPercent >= 90
-                                        ? "text-yellow-500 font-semibold"
-                                        : "text-green-500 font-semibold"
-                            }>{cat.usedPercent}%</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                            <span>Valor gasto:</span>
-                            <span>R$ {cat.spent.toLocaleString("pt-BR")}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                            <span>Devo gastar:</span>
-                            <span>R$ {cat.value.toLocaleString("pt-BR")}</span>
-                        </div>
+                <div className="flex items-center justify-center flex-wrap gap-8 mt-6">
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-green-500 text-lg font-medium">
+                            R$ {salary.toLocaleString("pt-BR")}
+                        </h1>
+                        <h2>Receitas</h2>
                     </div>
-                ))}
-            </div>
 
-            <div className="flex items-center justify-center flex-wrap gap-8 mt-6">
-                <div className="flex flex-col items-center">
-                    <h1 className="text-green-500 text-lg font-medium">
-                        R$ {salary.toLocaleString("pt-BR")}
-                    </h1>
-                    <h2>Receitas</h2>
-                </div>
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-red-500 text-lg font-medium">
+                            R$ {totalRealExpenses.toLocaleString("pt-BR")}
+                        </h1>
+                        <h2>Despesas</h2>
+                    </div>
 
-                <div className="flex flex-col items-center">
-                    <h1 className="text-red-500 text-lg font-medium">
-                        R$ {totalRealExpenses.toLocaleString("pt-BR")}
-                    </h1>
-                    <h2>Despesas</h2>
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-lg font-medium">{utilizationPercent}%</h1>
+                        <h2>Utilizado</h2>
+                    </div>
                 </div>
-
-                <div className="flex flex-col items-center">
-                    <h1 className="text-lg font-medium">{utilizationPercent}%</h1>
-                    <h2>Utilizado</h2>
-                </div>
-            </div>
-        </Card>
-    )
-}
+            </Card>
+        )
+    }

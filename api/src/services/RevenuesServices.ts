@@ -1,6 +1,6 @@
 import SalaryPrismaRepositories from "../repositories/prisma/RevenuesPrismaRepositories"
 
-import { Revenues } from "../models/Revenues"
+import { Revenues } from "../models/Revenue"
 
 class RevenuesServices {
 

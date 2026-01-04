@@ -9,5 +9,5 @@ server.use(Express.json());
 server.use(routes);
 
 server.listen(4000, () => {
-  console.log("Rodando em http://localhost:4000");
+  console.log("Server http://localhost:4000");
 });
