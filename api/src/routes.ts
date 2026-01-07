@@ -14,6 +14,8 @@ const categoryController = new CategoryController()
 
 routes.get("/users", userController.getAll)
 routes.get("/users/:id", userController.getById)
+routes.get("/users/:id/details", userController.getByIdWithRelations)
+routes.post("/users/:userId/revenues", revenuesController.create.bind(revenuesController))
 routes.post("/users", userController.create.bind(userController))
 routes.put("/users/:id", userController.update)
 routes.delete("/users/:id", userController.delete)

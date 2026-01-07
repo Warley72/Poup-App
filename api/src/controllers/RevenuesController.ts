@@ -7,65 +7,80 @@ const revenuesServices = new RevenuesServices(new RevenuesPrismaRepositories())
 
 class RevenuesController {
 
-    async getAll(Req: Request, Res: Response) {
+    async getAll(req: Request, res: Response) {
         try {
-            const dataSalary = await revenuesServices.getAll()
-            Res.json(dataSalary)
+
+            const data = await revenuesServices.getAll()
+
+            return res.json(data)
+
         } catch (err: any) {
-            Res.status(400).json({ error: err.message });
+            return res.status(400).json({ error: err.message })
         }
     }
 
-    async getById(Req: Request, Res: Response) {
+    async getById(req: Request, res: Response) {
         try {
 
-            const { id } = Req.params;
+            const { id } = req.params
 
-            if (!Req.params.id) {
-                throw new Error("Saldo nao existe")
+            if (!id) {
+                return res.status(400).json({ error: "Id é obrigatório" })
             }
 
-            const dataSalary = await revenuesServices.getById(id)
-            Res.json(dataSalary)
+            const data = await revenuesServices.getById(id)
+
+            return res.json(data)
         } catch (err: any) {
-            Res.status(400).json({ error: err.message });
+            return res.status(400).json({ error: err.message })
         }
     }
 
-    async create(Req: Request, Res: Response) {
+    async create(req: Request, res: Response) {
         try {
 
-            const data = Req.body
+            const userId = Number(req.params.userId)
 
-            const dataSalary = await revenuesServices.create(data)
-            Res.json(dataSalary)
+            if (isNaN(userId)) {
+                return res.status(400).json({ error: "userId inválido" })
+            }
+
+            const data = req.body
+
+            const revenue = await revenuesServices.create(userId, data)
+
+            return res.status(201).json(revenue)
+
         } catch (err: any) {
-            Res.status(400).json({ error: err.message });
+            return res.status(400).json({ error: err.message })
         }
     }
 
-    async update(Req: Request, Res: Response) {
+    async update(req: Request, res: Response) {
         try {
 
-            const id = Req.params.id
-            const data=  Req.body
+            const { id } = req.params
+            const data = req.body
 
-            const dataSalary = await revenuesServices.update(id, data)
-            Res.json(dataSalary)
+            const revenue = await revenuesServices.update(id, data)
+
+            return res.json(revenue)
+
         } catch (err: any) {
-            Res.status(400).json({ error: err.message });
+            return res.status(400).json({ error: err.message })
         }
     }
 
-    async delete(Req: Request, Res: Response) {
+    async delete(req: Request, res: Response) {
         try {
+            const { id } = req.params
 
-            const id = Req.params.id
+            await revenuesServices.delete(id)
 
-            const dataSalary = await revenuesServices.delete(id)
-            Res.json(dataSalary)
+            return res.status(204).send()
+            
         } catch (err: any) {
-            Res.status(400).json({ error: err.message });
+            return res.status(400).json({ error: err.message })
         }
     }
 }

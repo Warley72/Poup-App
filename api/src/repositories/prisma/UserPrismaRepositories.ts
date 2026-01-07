@@ -28,6 +28,19 @@ class UserPrismaRepositories {
             createdAt: user.createdAt
         }
     }
+    
+    async getByIdWithRelations(id: number) {
+        const user = await prisma.user.findUnique({
+            where: { id },
+            include: {
+                revenues: true,
+                expenses: true,
+                categories: true
+            }
+        })
+
+        return user
+    }
 
     async create(data: { name: string, password: string }): Promise<User> {
 
