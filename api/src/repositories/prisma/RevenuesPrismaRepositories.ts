@@ -31,9 +31,30 @@ class RevenuePrismaRepositories {
         }
     }
 
-    async create(data: { userId: number, total: number, month: number, year: number }): Promise<Revenue> {
+    async getByIdWithCategories(id: string) {
 
-        const revenue = await prisma.revenue.create({ data })
+        return prisma.revenue.findUnique({
+            where: { id },
+            include: {
+                categories: true
+            }
+        })
+    }
+
+    async create(
+        data: { userId: number, month: number, year: number,
+            categories: { name: string, amount: number }[] }) {
+
+        const revenue = await prisma.revenue.create({
+            data: {
+                userId: data.userId,
+                month: data.month,
+                year: data.year,
+                categories: {
+                    create: data.categories
+                }
+            }
+        })
 
         return {
             id: revenue.id,
@@ -43,7 +64,7 @@ class RevenuePrismaRepositories {
         }
     }
 
-    async update(id: string, data: { total?: number, month?: number, year?: number }): Promise<Revenue> {
+    async update(id: string, data: { month?: number, year?: number }): Promise<Revenue> {
 
         const revenue = await prisma.revenue.update({ where: { id }, data })
 
