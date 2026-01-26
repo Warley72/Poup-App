@@ -1,7 +1,9 @@
 import UserPrismaRepositories from "../repositories/prisma/UserPrismaRepositories";
 
-import { CreateUserDTO } from "../DTOs/user/CreateUser"
 import { User } from "../models/User"
+
+import { CreateUserDTO } from "../DTOs/user/CreateUser"
+import { UserWithRelationsDTO } from "../DTOs/user/UserWithRelations";
 
 class UserService {
 
@@ -23,15 +25,43 @@ class UserService {
         return { data: userData }
     }
 
-    async getByIdWithRelations(id: number) {
-
+    async getByIdWithRelations(id: number): Promise<{ data: UserWithRelationsDTO }> {
+        
         const user = await this._userRepository.getByIdWithRelations(id)
 
         if (!user) {
             throw new Error("Usuário não encontrado")
         }
 
-        return { data: user }
+        const total = user.revenues.reduce((acc, revenue) => {
+            const revenueTotal = revenue.categories.reduce(
+                (sum, category) => sum + category.amount,
+                0
+            )
+            return acc + revenueTotal
+        }, 0)
+
+        return {
+            data: {
+                id: user.id,
+                name: user.name,
+                total,
+                createdAt: user.createdAt,
+
+                revenues: user.revenues.map(revenue => ({
+                    id: revenue.id,
+                    month: revenue.month,
+                    year: revenue.year,
+                    createdAt: revenue.createdAt,
+                    categories: revenue.categories.map(cat => ({
+                        name: cat.name,
+                        amount: cat.amount
+                    }))
+                })),
+                expenses: user.expenses,
+                categories: user.categories
+            }
+        }
     }
 
     async create(data: CreateUserDTO): Promise<{ data: User }> {
@@ -51,7 +81,7 @@ class UserService {
     async delete(id: number): Promise<{ id: number }> {
 
         await this._userRepository.delete(id);
-        
+
         return { id };
     }
 }

@@ -36,6 +36,16 @@ class RevenuesController {
         }
     }
 
+    async getByIdWithDetails(req: Request, res: Response) {
+        try {
+            const { id } = req.params
+            const data = await revenuesServices.getByIdWithDetails(id)
+            res.json({ data })
+        } catch (err: any) {
+            res.status(400).json({ error: err.message })
+        }
+    }
+
     async create(req: Request, res: Response) {
         try {
 
@@ -78,7 +88,7 @@ class RevenuesController {
             await revenuesServices.delete(id)
 
             return res.status(204).send()
-            
+
         } catch (err: any) {
             return res.status(400).json({ error: err.message })
         }

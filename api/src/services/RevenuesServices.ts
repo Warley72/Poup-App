@@ -28,16 +28,30 @@ class RevenuesServices {
         return { data: revenueData }
     }
 
-    async getByIdWithCategories(id: string) {
+    async getByIdWithDetails(id: string): Promise<{ data: RevenueResponseDTO }> {
 
         const revenue = await this._RevenueRepository.getByIdWithCategories(id)
 
         if (!revenue) {
-            throw new Error("Revenue não encontrada")
+            throw new Error("Receita não encontrada")
         }
 
+        const total = revenue.categories.reduce(
+            (sum, category) => sum + category.amount,
+            0
+        )
+
         return {
-            data: revenue
+            data: {
+                id: revenue.id,
+                month: revenue.month,
+                year: revenue.year,
+                total,
+                categories: revenue.categories.map(cat => ({
+                    name: cat.name,
+                    amount: cat.amount
+                }))
+            }
         }
     }
 

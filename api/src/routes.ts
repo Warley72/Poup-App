@@ -22,6 +22,7 @@ routes.delete("/users/:id", userController.delete)
 
 routes.get("/revenues", revenuesController.getAll)
 routes.get("/revenues/:id", revenuesController.getById)
+routes.get("/revenues/:id/details", revenuesController.getByIdWithDetails)
 routes.post("/revenues", revenuesController.create)
 routes.put("/revenues/:id", revenuesController.update)
 routes.delete("/revenues/:id", revenuesController.delete)
