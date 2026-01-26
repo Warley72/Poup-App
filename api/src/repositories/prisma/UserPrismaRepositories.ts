@@ -1,5 +1,8 @@
 import { prisma } from "../../../lib/prisma"
+
 import { User } from "../../models/User"
+import { UserWithRelationsDTO } from "../../DTOs/user/UserWithRelations"
+import { RevenueWithCategoriesDTO } from "../../DTOs/revenue/RevenueWithCategoriesDTO"
 
 class UserPrismaRepositories {
 
@@ -28,18 +31,31 @@ class UserPrismaRepositories {
             createdAt: user.createdAt
         }
     }
-    
+
     async getByIdWithRelations(id: number) {
-        const user = await prisma.user.findUnique({
+
+        return prisma.user.findUnique({
             where: { id },
             include: {
-                revenues: true,
+                revenues: {
+                    include: {
+                        categories: true
+                    }
+                },
                 expenses: true,
                 categories: true
             }
         })
+    }
 
-        return user
+    async getByIdWithCategories(id: string): Promise<RevenueWithCategoriesDTO | null> {
+
+        return prisma.revenue.findUnique({
+            where: { id },
+            include: {
+                categories: true
+            }
+        })
     }
 
     async create(data: { name: string, password: string }): Promise<User> {

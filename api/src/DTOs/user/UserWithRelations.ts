@@ -1,13 +1,24 @@
-import { Revenue } from "../../models/Revenue"
 import { Expense } from "../../models/Expense"
 import { ExpenseCategory } from "../../models/ExpenseCategory"
+import { RevenueWithCategoriesDTO } from "../revenue/RevenueWithCategoriesDTO"
 
 export interface UserWithRelationsDTO {
     id: number
     name: string
     createdAt: Date
+    total: number
 
-    revenues: Revenue[]
+    revenues: {
+        id: string
+        month: number
+        year: number
+        createdAt: Date
+        categories: {
+            name: string
+            amount: number
+        }[]
+    }[]
+
     expenses: Expense[]
     categories: ExpenseCategory[]
 }
